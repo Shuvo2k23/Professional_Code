@@ -3,6 +3,10 @@ import java.text.*;
 import java.util.*;
 public class StudentList {
 	public static void main(String[] args) {
+		if(args.length != 1){
+			System.out.println("Please write right argument(a | r | c | +WORD | ?WORD).");
+			return;
+		}
 		if(args[0].equals("a")) {
 			System.out.println("Loading data ...");			
 			try {
