@@ -7,13 +7,10 @@ public class StudentList {
 			System.out.println("Please write right argument(a | r | c | +WORD | ?WORD).");
 			return;
 		}
+		String readLine = LoadData("students.txt");
 		if(args[0].equals("a")) {
 			System.out.println("Loading data ...");
 			try {
-				BufferedReader fileReader =	new BufferedReader(
-											new InputStreamReader(
-											new FileInputStream("students.txt")));
-				String readLine = fileReader.readLine();
 				String words[] = readLine.split(", ");
 				for(String word : words) {
 					System.out.println(word);
@@ -25,10 +22,6 @@ public class StudentList {
 		else if(args[0].equals("r")) {
 			System.out.println("Loading data ...");
 			try {
-				BufferedReader fileReader = new BufferedReader(
-											new InputStreamReader(
-											new FileInputStream("students.txt")));
-				String readLine = fileReader.readLine();
 				String words[] = readLine.split(", ");
 				Random random = new Random();
 				int randomNumber = random.nextInt(words.length);
@@ -54,10 +47,6 @@ public class StudentList {
 		else if(args[0].contains("?")) {
 			System.out.println("Loading data ...");
 			try {
-				BufferedReader fileReader = new BufferedReader(
-											new InputStreamReader(
-											new FileInputStream("students.txt")));
-				String readLine = fileReader.readLine();
 				String words[] = readLine.split(", ");
 				boolean done = false;
 				String newWord = args[0].substring(1);
@@ -73,10 +62,6 @@ public class StudentList {
 		else if(args[0].contains("c")) {
 			System.out.println("Loading data ...");
 			try {
-				BufferedReader fileReader = new BufferedReader(
-											new InputStreamReader(
-											new FileInputStream("students.txt")));
-				String readLine = fileReader.readLine();
 				char charArray[] = readLine.toCharArray();
 				boolean in_word = false;
 				int count=0;
@@ -94,6 +79,17 @@ public class StudentList {
 				System.out.println(count +" word(s) found " + charArray.length);
 			} catch (Exception e){}
 			System.out.println("Data Loaded.");
+		}
+	}
+	public static String LoadData(String fileName){
+		try{
+			BufferedReader fileReader = new BufferedReader(
+										new InputStreamReader(
+										new FileInputStream(fileName)));
+			String data = fileReader.readLine();
+			return  data;
+		}catch (Exception e){
+			return null;
 		}
 	}
 }
