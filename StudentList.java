@@ -4,63 +4,55 @@ import java.util.*;
 public class StudentList {
 	public static void main(String[] args) {
 		if(args.length != 1){
-			System.out.println("Please write right argument(a | r | c | +WORD | ?WORD).");
+			System.out.println(Constants.Wrong_Argument);
 			return;
 		}
-		String readLine = LoadData("students.txt");
-		if(args[0].equals("a")) {
-			System.out.println("Loading data ...");
+		String readLine = LoadData(Constants.STUDENT_LIST);
+		System.out.println(Constants.Loading);
+		if(args[0].equals(Constants.ShowAll)) {
 			try {
-				String words[] = readLine.split(", ");
+				String words[] = readLine.split(Constants.SplitAt);
 				for(String word : words) {
 					System.out.println(word);
 				}
 			} catch (Exception e){}
-			System.out.println("Data Loaded.");
 		}
 		// return random student
-		else if(args[0].equals("r")) {
-			System.out.println("Loading data ...");
+		else if(args[0].equals(Constants.ShowRandom)) {
 			try {
-				String words[] = readLine.split(", ");
+				String words[] = readLine.split(Constants.SplitAt);
 				Random random = new Random();
 				int randomNumber = random.nextInt(words.length);
 				System.out.println(words[randomNumber]);
 			} catch (Exception e){}
-			System.out.println("Data Loaded.");
 		}
-		else if(args[0].contains("+")){
-			System.out.println("Loading data ...");
+		else if(args[0].contains(Constants.AddEntry)){
 			try {
 				BufferedWriter fileReader = new BufferedWriter(
-											new FileWriter("students.txt", true));
+											new FileWriter(Constants.STUDENT_LIST, true));
 				String newWord = args[0].substring(1);
 				Date date = new Date();
-				String dateType = "dd/mm/yyyy-hh:mm:ss a";
+				String dateType = Constants.Date_Format;
 				DateFormat dateFormat = new SimpleDateFormat(dateType);
 				String fd= dateFormat.format(date);
 				fileReader.write(", "+newWord+"\nList last updated on "+fd);
 				fileReader.close();
 			} catch (Exception e){}
-			System.out.println("Data Loaded.");
 		}
-		else if(args[0].contains("?")) {
-			System.out.println("Loading data ...");
+		else if(args[0].contains(Constants.FindEntry)) {
 			try {
-				String words[] = readLine.split(", ");
+				String words[] = readLine.split(Constants.SplitAt);
 				boolean done = false;
 				String newWord = args[0].substring(1);
 				for(int idx = 0; idx<words.length && !done; idx++) {
 					if(words[idx].equals(newWord)) {
-						System.out.println("We found it!");
+						System.out.println(Constants.Found_Massage);
 						done=true;
 					}
 				}
 			} catch (Exception e){}
-			System.out.println("Data Loaded.");
 		}
-		else if(args[0].contains("c")) {
-			System.out.println("Loading data ...");
+		else if(args[0].contains(Constants.ShowCount)) {
 			try {
 				char charArray[] = readLine.toCharArray();
 				boolean in_word = false;
@@ -78,8 +70,8 @@ public class StudentList {
 				}
 				System.out.println(count +" word(s) found " + charArray.length);
 			} catch (Exception e){}
-			System.out.println("Data Loaded.");
 		}
+		System.out.println(Constants.Loaded);
 	}
 	public static String LoadData(String fileName){
 		try{
