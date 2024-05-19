@@ -31,11 +31,9 @@ public class StudentList {
 				BufferedWriter fileReader = new BufferedWriter(
 											new FileWriter(Constants.STUDENT_LIST, true));
 				String newWord = args[0].substring(1);
-				Date date = new Date();
-				String dateType = Constants.Date_Format;
-				DateFormat dateFormat = new SimpleDateFormat(dateType);
-				String fd= dateFormat.format(date);
-				fileReader.write(", "+newWord+"\nList last updated on "+fd);
+				DateFormat dateFormat = new SimpleDateFormat(Constants.Date_Format);
+				String fullDate = dateFormat.format(new Date());
+				fileReader.write(", "+newWord+"\nList last updated on "+fullDate);
 				fileReader.close();
 			} catch (Exception e){}
 		}
@@ -78,8 +76,7 @@ public class StudentList {
 			BufferedReader fileReader = new BufferedReader(
 										new InputStreamReader(
 										new FileInputStream(fileName)));
-			String data = fileReader.readLine();
-			return  data;
+			return fileReader.readLine();
 		}catch (Exception e){
 			return null;
 		}
