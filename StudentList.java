@@ -4,7 +4,7 @@ import java.util.*;
 public class StudentList {
 	public static void main(String[] args) {
 		if(args.length != 1){
-			System.out.println(Constants.Wrong_Argument);
+			wrongArgument();
 			return;
 		}
 		String readLine = LoadData(Constants.STUDENT_LIST);
@@ -56,6 +56,9 @@ public class StudentList {
 				System.out.println(words.length +" word(s) found ");
 			} catch (Exception e){}
 		}
+		else{
+			wrongArgument();
+		}
 		System.out.println(Constants.Loaded);
 	}
 	public static String LoadData(String fileName){
@@ -67,5 +70,8 @@ public class StudentList {
 		}catch (Exception e){
 			return null;
 		}
+	}
+	public static void wrongArgument(){
+		System.out.println(Constants.Wrong_Argument);
 	}
 }
